@@ -1,11 +1,9 @@
 import { expect, test } from 'vitest'
-import { build } from '../helper'
-
-const app = build()
+import { app } from '../../../../test.setup'
 
 test('default root route', async () => {
   const res = await app.inject({
-    url: '/'
+    url: '/v1/user'
   })
-  expect(res.json()).toEqual({ root: true })
+  expect(res.json()).toEqual({ user: true })
 })

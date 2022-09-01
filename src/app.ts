@@ -1,20 +1,15 @@
 import { FastifyPluginAsync } from 'fastify'
 
-import sensible from './plugins/sensible'
-import support from './plugins/support'
+import sensible from './core/plugins/sensible'
 
-import example from './routes/example'
-import root from './routes/root'
+import v1UserRoute from './modules/v1/user/user.route'
 
-const app: FastifyPluginAsync = async (fastify): Promise<void> => {
+export const app: FastifyPluginAsync = async (fastify): Promise<void> => {
   // Plygins
   fastify.register(sensible)
-  fastify.register(support)
 
   // Routes
-  fastify.register(root)
-  fastify.register(example, { prefix: '/example' })
+  fastify.register(v1UserRoute, { prefix: '/v1/user' })
 }
 
 export default app
-export { app }
